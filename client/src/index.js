@@ -1,4 +1,3 @@
-// Read the “API_URL” that Dotenv injected from .env
 const apiUrl = process.env.API_URL;
 
 const container = document.getElementById('pokemon-container');

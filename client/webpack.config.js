@@ -47,6 +47,8 @@ module.exports = {
       template: path.resolve(__dirname, 'public', 'index.html'),
       filename: 'index.html',
     }),
-    new Dotenv(), // Reads .env and makes process.env.API_URL available
+    new Dotenv({
+        systemvars: true,
+    }), // Reads .env and makes process.env.API_URL available
   ],
 };
