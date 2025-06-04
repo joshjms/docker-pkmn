@@ -46,3 +46,7 @@ This is a bit difficult - it's okay if you can't do this yet.
 
 Now that you have your Pokedex web application and the HTTP server running together, now we want them as two services in a Docker Compose setup. There is an empty `docker-compose.yaml` at the root directory. There are several things to note here but you will get there when you get there. 
 
+## Additional Exercise
+
+Try adding some new Pokemon into `pokedex/pokemon.json` and rebuild the images. You can do `docker compose up --build`. See if the new Pokemon gets shown.
+
