@@ -40,6 +40,8 @@ npm start
 
 Now, we want to make a Docker container for it. Don't forget to pass the environment variable.
 
+Around here, it actually doesn't seem to work.
+
 ## Exercise 3 - Putting it all Together
 
 This is a bit difficult - it's okay if you can't do this yet. 
