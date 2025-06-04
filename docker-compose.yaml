@@ -1,0 +1,19 @@
+services:
+  pokedex:
+    image: pokedex:latest
+    build:
+      context: ./pokedex
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+  pkmn:
+    image: pkmnwebapp:latest
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - API_URL=http://localhost:5000/pkmn
+    depends_on:
+      - pokedex
