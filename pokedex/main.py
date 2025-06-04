@@ -26,4 +26,4 @@ def get_data():
 
 # By default, Flask runs on port 5000
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', debug=True)
