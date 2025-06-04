@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Webpack Pokémon Fetch</title>
+    <style>
+        /* Simple “card” styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #pokemon-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .pokemon-card {
+            width: 120px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .pokemon-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+        }
+
+        .pokemon-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align:center; margin-top:1rem;">Pokémon List</h1>
+    <div id="pokemon-container"></div>
+    <div id="error-message" class="error"></div>
+    <!-- bundle.js will be injected here by HtmlWebpackPlugin -->
+</body>
+
+</html>

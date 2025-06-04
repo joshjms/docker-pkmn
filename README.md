@@ -27,3 +27,15 @@ The expected output from the server is:
 ]
 ```
 
+## Exercise 2 - The Client
+
+Now that we have an HTTP Server ready, we want to deploy our client application as well. 
+
+Under `client`, we have the web application ready - you can start it too.
+
+```bash
+npm install
+npm start
+```
+
+Now, we want to make a Docker container for it. Don't forget to pass the environment variable.

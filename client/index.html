@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fetch & Display Pokémon</title>
+    <style>
+        #pokemon-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .pokemon-card {
+            width: 120px;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .pokemon-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto 0.5rem;
+        }
+
+        .pokemon-name {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 2rem;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="text-align:center; font-family: Arial, sans-serif;">My Pokémon</h1>
+    <div id="pokemon-container">
+        <!-- Cards will be injected here -->
+    </div>
+    <div id="error-message" class="error"></div>
+
+    <script>
+        (function () {
+            const apiUrl = "http://localhost:5000/pkmn";
+
+            const container = document.getElementById('pokemon-container');
+            const errorMessage = document.getElementById('error-message');
+
+            if (!apiUrl || typeof apiUrl !== 'string') {
+                errorMessage.textContent = '⚠️ API_URL is not defined. Make sure you injected it at build/runtime.';
+                return;
+            }
+
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not OK (status ${response.status})`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (!Array.isArray(data)) {
+                        throw new Error('API did not return an array');
+                    }
+                    renderPokemons(data);
+                })
+                .catch(err => {
+                    console.error(err);
+                    errorMessage.textContent = '⚠️ Error fetching data: ' + err.message;
+                });
+
+            function renderPokemons(pokemonArray) {
+                // Clear any existing content
+                container.innerHTML = '';
+
+                if (pokemonArray.length === 0) {
+                    container.innerHTML = '<p style="text-align:center;">No Pokémon found.</p>';
+                    return;
+                }
+
+                pokemonArray.forEach(item => {
+                    // Basic validation
+                    if (!item.name || !item.image) return;
+
+                    const card = document.createElement('div');
+                    card.classList.add('pokemon-card');
+
+                    const img = document.createElement('img');
+                    img.src = item.image;
+                    img.alt = item.name;
+                    img.onerror = () => {
+                        img.src = '';
+                        img.alt = 'Image failed to load';
+                    };
+
+                    const nameEl = document.createElement('div');
+                    nameEl.classList.add('pokemon-name');
+                    nameEl.textContent = item.name;
+
+                    card.appendChild(img);
+                    card.appendChild(nameEl);
+                    container.appendChild(card);
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>
